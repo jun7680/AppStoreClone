@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "RIBs",
+        "repositoryURL": "https://github.com/uber/RIBs",
+        "state": {
+          "branch": "master",
+          "revision": "de683812acb9df5dad84cc2cdbac848f683bd027",
+          "version": null
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift",
+        "state": {
+          "branch": null,
+          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
+          "version": "6.5.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
