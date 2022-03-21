@@ -11,13 +11,16 @@ import RxCocoa
 import RxRelay
 import UIKit
 
-protocol SearchPresentableListener: AnyObject {    
+protocol SearchPresentableListener: AnyObject {
+    func search(term: String?)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
+    
     var disposeBag = DisposeBag()
     weak var listener: SearchPresentableListener?
-    
+    private var resultCount = 0
+    private var result = [Result]()
     @IBOutlet weak var searchColletionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var cancelButton: UIButton!
@@ -50,24 +53,38 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         searchBar.rx.textDidBeginEditing
             .asDriver()
             .drive(with: self) { owner, _ in
-                owner.cancelButton.isHidden = false
-                UIView.transition(with: owner.navigationController!.navigationBar, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                    owner.navigationController?.navigationBar.prefersLargeTitles = false
-                })
-                
-
+//                owner.cancelButton.isHidden = false
+//                UIView.transition(with: owner.navigationController!.navigationBar, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//                    owner.navigationController?.navigationBar.prefersLargeTitles = false
+//                })
             }.disposed(by: disposeBag)
+        
+        searchBar.rx.searchButtonClicked
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.listener?.search(term: owner.searchBar.text)
+            }.disposed(by: disposeBag)
+    }
+    
+    func searchResultUpdate(_ result: SearchResultDTO?) {
+        
+        if let result = result?.results {
+            self.result = result
+            DispatchQueue.main.async {
+                self.searchColletionView.reloadData()                
+            }
+        }
     }
 }
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return result.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as? SearchResultCell else { return .init() }
-        
+        cell.configure(from: result[indexPath.row])
         return cell
     }
     

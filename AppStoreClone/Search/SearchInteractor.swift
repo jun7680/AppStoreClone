@@ -14,7 +14,7 @@ protocol SearchRouting: ViewableRouting {
 
 protocol SearchPresentable: Presentable {
     var listener: SearchPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func searchResultUpdate(_ result: SearchResultDTO?)
 }
 
 protocol SearchListener: AnyObject {
@@ -26,8 +26,6 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     weak var router: SearchRouting?
     weak var listener: SearchListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: SearchPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -35,16 +33,19 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        print("aa")
-//        Service.shared.search(term: "카카오뱅크") { result, error in
-//            print(result?.results)
-//            print(result?.resultCount)
-//            
-//        }
+        search(term: "카카오")
     }
 
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func search(term: String?) {
+        guard let term = term else { return }
+        Service.shared.search(term: term) { [weak self] result, error in
+            print(error)
+            self?.presenter.searchResultUpdate(result)
+        }
     }
 }

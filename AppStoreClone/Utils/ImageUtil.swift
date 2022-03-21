@@ -16,3 +16,11 @@ extension String {
         return UIImage(data: data)
     }
 }
+
+/// ImageCache
+class ImageCache {
+    static let shared = NSCache<NSString, UIImage>()
+    
+    private init() {}
+}
+

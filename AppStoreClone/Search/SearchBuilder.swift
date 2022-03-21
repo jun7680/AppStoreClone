@@ -32,7 +32,6 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
 
     func build(withListener listener: SearchListener) -> ViewableRouting {
         let component = SearchComponent(dependency: dependency)
-//        let viewController = SearchViewController()
         let storyBoard = UIStoryboard(name: "SearchViewController", bundle: nil)
         let viewController = storyBoard.instantiateViewController(
             withIdentifier: "SearchViewController"

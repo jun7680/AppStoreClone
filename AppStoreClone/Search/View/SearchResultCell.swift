@@ -14,7 +14,10 @@ class SearchResultCell: UICollectionViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var installButton: UIButton!
-    @IBOutlet weak var screenShotVies: UIStackView!
+    @IBOutlet weak var screenShotViews: UIStackView!
+    @IBOutlet weak var screenShot1: UIImageView!
+    @IBOutlet weak var screenShot2: UIImageView!
+    @IBOutlet weak var screenShot3: UIImageView!
     
     private let ratingView: CosmosView = {
        let view = CosmosView()
@@ -53,6 +56,7 @@ class SearchResultCell: UICollectionViewCell {
     
     private func setupView() {
         addSubview(ratingView)
+
         NSLayoutConstraint.activate([
             ratingView.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             ratingView.topAnchor.constraint(equalTo: category.bottomAnchor, constant: 5),
@@ -62,6 +66,41 @@ class SearchResultCell: UICollectionViewCell {
     }
     
     func configure(from result: Result) {
-        titleImage.image = result.artworkUrl512.image
+        let titleImageKey = NSString(string: result.artworkUrl512 ?? String())
+        let screenShot1Cache = NSString(string: result.screenshotUrls?[0] ?? String())
+        let screenShot2Cache = NSString(string: result.screenshotUrls?[1] ?? String())
+        let screenShot3Cache = NSString(string: result.screenshotUrls?[2] ?? String())
+        
+        if let cacheImage = ImageCache.shared.object(forKey: titleImageKey) {
+            titleImage.image = cacheImage
+        } else {
+            titleImage.image = result.artworkUrl512?.image
+        }
+        
+        if let cacheImage = ImageCache.shared.object(forKey: screenShot1Cache) {
+            screenShot1.image = cacheImage
+        } else {
+            let image = result.screenshotUrls?[0].image ?? UIImage()
+            ImageCache.shared.setObject(image, forKey: screenShot1Cache)
+            screenShot1.image = image
+        }
+        
+        if let cacheImage = ImageCache.shared.object(forKey: screenShot2Cache) {
+            screenShot2.image = cacheImage
+        } else {
+            let image = result.screenshotUrls?[1].image ?? UIImage()
+            ImageCache.shared.setObject(image, forKey: screenShot2Cache)
+            screenShot2.image = image
+        }
+        
+        if let cacheImage = ImageCache.shared.object(forKey: screenShot3Cache) {
+            screenShot3.image = cacheImage
+        } else {
+            let image = result.screenshotUrls?[2].image ?? UIImage()
+            ImageCache.shared.setObject(image, forKey: screenShot3Cache)
+            screenShot3.image = image
+        }
+        ratingView.rating = result.averageUserRating ?? 0
+        title.text = result.trackName
     }
 }

@@ -38,10 +38,12 @@ class Service {
 //
 //            }
 //            print("bb")
+
             guard let data = data else { return }
             
             do {
                 let result = try JSONDecoder().decode(T.self, from: data)
+                print(result)
                 completion(result, nil)
             } catch let jsonError {
                 completion(nil, jsonError)
