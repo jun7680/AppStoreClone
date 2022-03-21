@@ -21,6 +21,9 @@ extension String {
 class ImageCache {
     static let shared = NSCache<NSString, UIImage>()
     
+    static func test() {
+        
+    }
     private init() {}
 }
 

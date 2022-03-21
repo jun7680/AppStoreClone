@@ -34,6 +34,7 @@
 		6639022627E75B4600BEB0BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639022127E75B4600BEB0BC /* SearchViewController.swift */; };
 		6639022727E75B4600BEB0BC /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639022227E75B4600BEB0BC /* SearchBuilder.swift */; };
 		6639022827E75B4600BEB0BC /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639022327E75B4600BEB0BC /* SearchInteractor.swift */; };
+		669EDAB527E8D019009C9B80 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669EDAB427E8D019009C9B80 /* Int+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		6639022127E75B4600BEB0BC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6639022227E75B4600BEB0BC /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
 		6639022327E75B4600BEB0BC /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		669EDAB427E8D019009C9B80 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			children = (
 				6639021B27E73B8700BEB0BC /* Ribs+Navi.swift */,
 				57479E5C27E86072001CD334 /* ImageUtil.swift */,
+				669EDAB427E8D019009C9B80 /* Int+.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				6639022427E75B4600BEB0BC /* SearchRouter.swift in Sources */,
 				57479E5D27E86072001CD334 /* ImageUtil.swift in Sources */,
 				6639022827E75B4600BEB0BC /* SearchInteractor.swift in Sources */,
+				669EDAB527E8D019009C9B80 /* Int+.swift in Sources */,
 				663901D327E7372900BEB0BC /* AppDelegate.swift in Sources */,
 				6639020727E7392600BEB0BC /* AppComponent.swift in Sources */,
 				577A0D0127E827220038F5EE /* SearchResultCell.swift in Sources */,

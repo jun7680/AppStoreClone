@@ -101,6 +101,8 @@ class SearchResultCell: UICollectionViewCell {
             screenShot3.image = image
         }
         ratingView.rating = result.averageUserRating ?? 0
+        ratingView.text = result.userRatingCount?.userCountingFormat
         title.text = result.trackName
+        category.text = result.primaryGenreName
     }
 }
