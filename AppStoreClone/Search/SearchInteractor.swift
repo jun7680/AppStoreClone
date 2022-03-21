@@ -35,7 +35,12 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        print("aa")
+//        Service.shared.search(term: "카카오뱅크") { result, error in
+//            print(result?.results)
+//            print(result?.resultCount)
+//            
+//        }
     }
 
     override func willResignActive() {

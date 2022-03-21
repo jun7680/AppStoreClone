@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import UIKit
 
 protocol AppRootDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
@@ -31,7 +32,12 @@ final class AppRootBuilder: Builder<AppRootDependency>, AppRootBuildable {
 
     func build() -> LaunchRouting {
         let component = AppRootComponent(dependency: dependency)
-        let viewController = RootTabBarController()
+//        let viewController = RootTabBarController()
+        let storyBoard = UIStoryboard(name: "RootTabBarController", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(
+            withIdentifier: "RootTabBarController"
+        ) as! RootTabBarController
+
         let interactor = AppRootInteractor(presenter: viewController)
         
         let search = SearchBuilder(dependency: component)
