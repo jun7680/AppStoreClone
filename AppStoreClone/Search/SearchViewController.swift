@@ -47,8 +47,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
-        
-        navigationController?.navigationBar.tintColor = .white
+
+//        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance

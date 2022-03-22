@@ -34,8 +34,10 @@ extension ViewControllable {
   
   func pushViewController(_ viewControllable: ViewControllable, animated: Bool) {
     if let nav = self.uiviewController as? UINavigationController {
-      nav.pushViewController(viewControllable.uiviewController, animated: animated)
+        print("nav")
+        nav.pushViewController(viewControllable.uiviewController, animated: animated)
     } else {
+        print("nav2")
       self.uiviewController.navigationController?.pushViewController(viewControllable.uiviewController, animated: animated)
     }
   }
