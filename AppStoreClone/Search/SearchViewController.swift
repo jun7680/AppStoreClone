@@ -13,6 +13,10 @@ import UIKit
 
 protocol SearchPresentableListener: AnyObject {
     func search(term: String?)
+    func searchWithPagination(offset: Int)
+    
+    //select
+    func goToDetail(_ item: Result)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -23,7 +27,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     private var result = [Result]()
     @IBOutlet weak var searchColletionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,30 +58,24 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         searchBar.rx.textDidBeginEditing
             .asDriver()
             .drive(with: self) { owner, _ in
-//                owner.cancelButton.isHidden = false
-//                UIView.transition(with: owner.navigationController!.navigationBar, duration: 0.5, options: .transitionCrossDissolve, animations: {
-//                    owner.navigationController?.navigationBar.prefersLargeTitles = false
-//                })
             }.disposed(by: disposeBag)
         
         searchBar.rx.searchButtonClicked
             .asDriver()
             .drive(with: self) { owner, _ in
+                owner.activityIndicator.startAnimating()
                 owner.listener?.search(term: owner.searchBar.text)
             }.disposed(by: disposeBag)
     }
     
-    func searchResultUpdate(_ result: SearchResultDTO?) {
-        
-        if let result = result?.results {
-            self.result = result
-            DispatchQueue.main.async {
-                self.searchColletionView.reloadData()                
-            }
+    func searchResultUpdate(_ result: [Result]) {
+        self.result = result
+        DispatchQueue.main.async {
+            self.searchColletionView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
 }
-
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return result.count
@@ -90,6 +89,17 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == result.count - 2 {
+            activityIndicator.startAnimating()            
+            listener?.searchWithPagination(offset: result.count)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        listener?.goToDetail(result[indexPath.row])
     }
     
 }

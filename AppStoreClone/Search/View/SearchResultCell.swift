@@ -15,12 +15,9 @@ class SearchResultCell: UICollectionViewCell {
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var installButton: UIButton!
     @IBOutlet weak var screenShotViews: UIStackView!
-    @IBOutlet weak var screenShot1: UIImageView!
-    @IBOutlet weak var screenShot2: UIImageView!
-    @IBOutlet weak var screenShot3: UIImageView!
     
     private let ratingView: CosmosView = {
-       let view = CosmosView()
+        let view = CosmosView()
         view.settings.updateOnTouch = false
         view.settings.fillMode = .precise
         view.settings.starSize = 14
@@ -34,6 +31,22 @@ class SearchResultCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    lazy var screenShot1 = createUIImageView()
+    lazy var screenShot2 = createUIImageView()
+    lazy var screenShot3 = createUIImageView()
+    
+    func createUIImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .white
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        imageView.contentMode = .scaleToFill
+        
+        return imageView
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,11 +65,17 @@ class SearchResultCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         ratingView.rating = 0
+        screenShot1.image = nil
+        screenShot2.image = nil
+        screenShot3.image = nil
     }
     
     private func setupView() {
         addSubview(ratingView)
-
+        screenShotViews.addArrangedSubview(screenShot1)
+        screenShotViews.addArrangedSubview(screenShot2)
+        screenShotViews.addArrangedSubview(screenShot3)
+        
         NSLayoutConstraint.activate([
             ratingView.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             ratingView.topAnchor.constraint(equalTo: category.bottomAnchor, constant: 5),
@@ -66,42 +85,54 @@ class SearchResultCell: UICollectionViewCell {
     }
     
     func configure(from result: Result) {
-        let titleImageKey = NSString(string: result.artworkUrl512 ?? String())
-        let screenShot1Cache = NSString(string: result.screenshotUrls?[0] ?? String())
-        let screenShot2Cache = NSString(string: result.screenshotUrls?[1] ?? String())
-        let screenShot3Cache = NSString(string: result.screenshotUrls?[2] ?? String())
-        
+        let titleImageKey = NSString(string: result.artworkUrl512)
         if let cacheImage = ImageCache.shared.object(forKey: titleImageKey) {
             titleImage.image = cacheImage
         } else {
-            titleImage.image = result.artworkUrl512?.image
+            titleImage.imageFromUrl(result.artworkUrl512, image: UIImage())
         }
         
-        if let cacheImage = ImageCache.shared.object(forKey: screenShot1Cache) {
-            screenShot1.image = cacheImage
-        } else {
-            let image = result.screenshotUrls?[0].image ?? UIImage()
-            ImageCache.shared.setObject(image, forKey: screenShot1Cache)
-            screenShot1.image = image
+        let screenShot1Cache = NSString(string: result.screenshotUrls[0])
+        screenShot1.imageFromUrl(result.screenshotUrls[0], image: UIImage())
+//        if let cacheImage = ImageCache.shared.object(forKey: screenShot1Cache) {
+//            screenShot1.image = cacheImage
+//        } else {
+////            let image = result.screenshotUrls[0].image
+////            ImageCache.shared.setObject(image, forKey: screenShot1Cache)
+//        }
+
+        if result.screenshotUrls.count > 1 {
+            let screenShot2Cache = NSString(string: result.screenshotUrls[1])
+            screenShot2.imageFromUrl(result.screenshotUrls[1], image: UIImage())
+        }
+//        let screenShot3Cache = NSString(string: result.screenshotUrls?[2] ?? String())
+        
+        if result.screenshotUrls.count > 2 {
+            screenShot3.imageFromUrl(result.screenshotUrls[2], image: UIImage())
         }
         
-        if let cacheImage = ImageCache.shared.object(forKey: screenShot2Cache) {
-            screenShot2.image = cacheImage
-        } else {
-            let image = result.screenshotUrls?[1].image ?? UIImage()
-            ImageCache.shared.setObject(image, forKey: screenShot2Cache)
-            screenShot2.image = image
-        }
         
-        if let cacheImage = ImageCache.shared.object(forKey: screenShot3Cache) {
-            screenShot3.image = cacheImage
-        } else {
-            let image = result.screenshotUrls?[2].image ?? UIImage()
-            ImageCache.shared.setObject(image, forKey: screenShot3Cache)
-            screenShot3.image = image
-        }
-        ratingView.rating = result.averageUserRating ?? 0
-        ratingView.text = result.userRatingCount?.userCountingFormat
+//
+//        if let cacheImage = ImageCache.shared.object(forKey: screenShot2Cache) {
+//            screenShot2.image = cacheImage
+//        } else {
+//            let image = result.screenshotUrls?[1].image ?? UIImage()
+//            ImageCache.shared.setObject(image, forKey: screenShot2Cache)
+////            screenShot2.image = image
+//            screenShot2.imageFromUrl(result.screenshotUrls?[1] ?? "", image: UIImage())
+//        }
+//
+//        if let cacheImage = ImageCache.shared.object(forKey: screenShot3Cache) {
+//            screenShot3.image = cacheImage
+//        } else {
+//            let image = result.screenshotUrls?[2].image ?? UIImage()
+//            ImageCache.shared.setObject(image, forKey: screenShot3Cache)
+////            screenShot3.image = image
+//            screenShot3.imageFromUrl(result.screenshotUrls?[2] ?? "", image: UIImage())
+//        }
+        
+        ratingView.rating = result.averageUserRating
+        ratingView.text = result.userRatingCount.userCountingFormat
         title.text = result.trackName
         category.text = result.primaryGenreName
     }

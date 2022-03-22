@@ -7,7 +7,8 @@
 
 import RIBs
 
-protocol SearchInteractable: Interactable {
+protocol SearchInteractable: Interactable,
+                             SearchDetailListener {
     var router: SearchRouting? { get set }
     var listener: SearchListener? { get set }
 }
@@ -18,9 +19,24 @@ protocol SearchViewControllable: ViewControllable {
 
 final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControllable>, SearchRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: SearchInteractable, viewController: SearchViewControllable) {
+    private let searchDetailBuilder: SearchDetailBuildable
+    private var searchDetailRouting: SearchDetailRouting?
+    
+    init(
+        interactor: SearchInteractable,
+        viewController: SearchViewControllable,
+        searchDetailBuilder: SearchDetailBuildable
+    ) {
+        self.searchDetailBuilder = searchDetailBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func routeToDetail(_ item: Result) {
+        let routing = searchDetailBuilder.build(withListener: interactor, item: item)
+        searchDetailRouting = routing
+        attachChild(routing)
+        
+        viewControllable.pushViewController(routing.viewControllable, animated: true)
     }
 }

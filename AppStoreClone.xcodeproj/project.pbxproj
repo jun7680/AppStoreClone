@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5727F45A27E99F2E004A4C7F /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727F45927E99F2E004A4C7F /* TitleCell.swift */; };
+		5727F45C27E99F35004A4C7F /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727F45B27E99F35004A4C7F /* DescriptionCell.swift */; };
+		5727F45E27E99F43004A4C7F /* ScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727F45D27E99F43004A4C7F /* ScreenShotCell.swift */; };
+		573C301D27E9543B00BD73A3 /* SearchDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C301827E9543B00BD73A3 /* SearchDetailRouter.swift */; };
+		573C301E27E9543B00BD73A3 /* SearchDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 573C301927E9543B00BD73A3 /* SearchDetailViewController.storyboard */; };
+		573C301F27E9543B00BD73A3 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C301A27E9543B00BD73A3 /* SearchDetailViewController.swift */; };
+		573C302027E9543B00BD73A3 /* SearchDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C301B27E9543B00BD73A3 /* SearchDetailBuilder.swift */; };
+		573C302127E9543B00BD73A3 /* SearchDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C301C27E9543B00BD73A3 /* SearchDetailInteractor.swift */; };
+		573C302327E96EB400BD73A3 /* SearchComponent+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C302227E96EB400BD73A3 /* SearchComponent+.swift */; };
 		57479E5B27E84667001CD334 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57479E5A27E84667001CD334 /* Service.swift */; };
 		57479E5D27E86072001CD334 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57479E5C27E86072001CD334 /* ImageUtil.swift */; };
 		57479E6027E86942001CD334 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 57479E5F27E86942001CD334 /* RxCocoa */; };
@@ -55,6 +64,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5727F45927E99F2E004A4C7F /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		5727F45B27E99F35004A4C7F /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
+		5727F45D27E99F43004A4C7F /* ScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCell.swift; sourceTree = "<group>"; };
+		573C301827E9543B00BD73A3 /* SearchDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailRouter.swift; sourceTree = "<group>"; };
+		573C301927E9543B00BD73A3 /* SearchDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchDetailViewController.storyboard; sourceTree = "<group>"; };
+		573C301A27E9543B00BD73A3 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
+		573C301B27E9543B00BD73A3 /* SearchDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailBuilder.swift; sourceTree = "<group>"; };
+		573C301C27E9543B00BD73A3 /* SearchDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailInteractor.swift; sourceTree = "<group>"; };
+		573C302227E96EB400BD73A3 /* SearchComponent+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchComponent+.swift"; sourceTree = "<group>"; };
 		57479E5A27E84667001CD334 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		57479E5C27E86072001CD334 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		57796C2327E7FA5800F48E09 /* RootTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RootTabBarController.storyboard; sourceTree = "<group>"; };
@@ -114,6 +132,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		573C301727E9542400BD73A3 /* SearchDetail */ = {
+			isa = PBXGroup;
+			children = (
+				573C302427E98DD600BD73A3 /* View */,
+				573C301827E9543B00BD73A3 /* SearchDetailRouter.swift */,
+				573C301927E9543B00BD73A3 /* SearchDetailViewController.storyboard */,
+				573C301A27E9543B00BD73A3 /* SearchDetailViewController.swift */,
+				573C301B27E9543B00BD73A3 /* SearchDetailBuilder.swift */,
+				573C301C27E9543B00BD73A3 /* SearchDetailInteractor.swift */,
+			);
+			path = SearchDetail;
+			sourceTree = "<group>";
+		};
+		573C302427E98DD600BD73A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5727F45927E99F2E004A4C7F /* TitleCell.swift */,
+				5727F45B27E99F35004A4C7F /* DescriptionCell.swift */,
+				5727F45D27E99F43004A4C7F /* ScreenShotCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		57479E5927E84631001CD334 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +213,7 @@
 				6639020527E7390700BEB0BC /* Application */,
 				6639020827E7393C00BEB0BC /* AppRoot */,
 				6639021127E73AB900BEB0BC /* Search */,
+				573C301727E9542400BD73A3 /* SearchDetail */,
 				577A0D0227E83CA50038F5EE /* DTO */,
 				57479E5927E84631001CD334 /* Network */,
 				6639021A27E73B7500BEB0BC /* Utils */,
@@ -228,6 +270,7 @@
 				6639022027E75B4600BEB0BC /* SearchViewController.storyboard */,
 				6639022127E75B4600BEB0BC /* SearchViewController.swift */,
 				6639022227E75B4600BEB0BC /* SearchBuilder.swift */,
+				573C302227E96EB400BD73A3 /* SearchComponent+.swift */,
 				6639022327E75B4600BEB0BC /* SearchInteractor.swift */,
 			);
 			path = Search;
@@ -360,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				663901DF27E7372A00BEB0BC /* LaunchScreen.storyboard in Resources */,
+				573C301E27E9543B00BD73A3 /* SearchDetailViewController.storyboard in Resources */,
 				663901DC27E7372A00BEB0BC /* Assets.xcassets in Resources */,
 				57796C2427E7FA5800F48E09 /* RootTabBarController.storyboard in Resources */,
 				6639022527E75B4600BEB0BC /* SearchViewController.storyboard in Resources */,
@@ -394,14 +438,22 @@
 				6639022727E75B4600BEB0BC /* SearchBuilder.swift in Sources */,
 				6639022627E75B4600BEB0BC /* SearchViewController.swift in Sources */,
 				577A0D0527E83CCA0038F5EE /* SearchResultDTO.swift in Sources */,
+				573C301D27E9543B00BD73A3 /* SearchDetailRouter.swift in Sources */,
+				5727F45C27E99F35004A4C7F /* DescriptionCell.swift in Sources */,
 				6639021027E7394C00BEB0BC /* AppRootInteractor.swift in Sources */,
 				6639022427E75B4600BEB0BC /* SearchRouter.swift in Sources */,
 				57479E5D27E86072001CD334 /* ImageUtil.swift in Sources */,
+				573C302327E96EB400BD73A3 /* SearchComponent+.swift in Sources */,
+				5727F45E27E99F43004A4C7F /* ScreenShotCell.swift in Sources */,
+				5727F45A27E99F2E004A4C7F /* TitleCell.swift in Sources */,
+				573C302127E9543B00BD73A3 /* SearchDetailInteractor.swift in Sources */,
 				6639022827E75B4600BEB0BC /* SearchInteractor.swift in Sources */,
 				669EDAB527E8D019009C9B80 /* Int+.swift in Sources */,
+				573C302027E9543B00BD73A3 /* SearchDetailBuilder.swift in Sources */,
 				663901D327E7372900BEB0BC /* AppDelegate.swift in Sources */,
 				6639020727E7392600BEB0BC /* AppComponent.swift in Sources */,
 				577A0D0127E827220038F5EE /* SearchResultCell.swift in Sources */,
+				573C301F27E9543B00BD73A3 /* SearchDetailViewController.swift in Sources */,
 				6639020F27E7394C00BEB0BC /* AppRootBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q934YS22W7;
+				DEVELOPMENT_TEAM = DGUC4ZZN2Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppStoreClone/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -601,7 +653,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q934YS22W7;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppStoreClone/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

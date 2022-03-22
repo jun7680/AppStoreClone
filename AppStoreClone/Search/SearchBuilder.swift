@@ -37,7 +37,13 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
             withIdentifier: "SearchViewController"
         ) as! SearchViewController
         let interactor = SearchInteractor(presenter: viewController)
+        
+        let searchDetailBuilder = SearchDetailBuilder(dependency: component)
         interactor.listener = listener
-        return SearchRouter(interactor: interactor, viewController: viewController)
+        return SearchRouter(
+            interactor: interactor,
+            viewController: viewController,
+            searchDetailBuilder: searchDetailBuilder
+        )
     }
 }
