@@ -33,7 +33,6 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
     }
     
     func routeToDetail(_ item: Result) {
-        print("searchDetailRouting", searchDetailRouting)
         let routing = searchDetailBuilder.build(withListener: interactor, item: item)
         searchDetailRouting = routing
         attachChild(routing)

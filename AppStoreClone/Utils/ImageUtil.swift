@@ -8,15 +8,6 @@
 import Foundation
 import UIKit
 
-extension String {
-    var image: UIImage? {
-        let url = URL(string: self)!
-        guard let data = try? Data(contentsOf: url) else { return UIImage() }
-        
-        return UIImage(data: data)
-    }
-}
-
 extension UIImageView {
     func imageFromUrl(_ url: String, image: UIImage?) {
         self.image = nil

@@ -19,7 +19,6 @@ class Service {
     private func fetchResult<T: Decodable>(url: String, completion: @escaping (T?, Error?) -> Void) {
         guard let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         guard let url = URL(string: urlString) else { return }
-        print(url)
         let configure = URLSessionConfiguration.default
         let session = URLSession(configuration: configure)
         session.dataTask(with: url) { data, response, error in
@@ -27,13 +26,6 @@ class Service {
                 completion(nil, error)
                 return
             }
-//            let success = 200..<300
-//            print("bbvb")
-//            print((response as? HTTPURLResponse)?.statusCode)
-//            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, success.contains(statusCode) else {
-//                return
-//
-//            }
 
             guard let data = data else { return }
             

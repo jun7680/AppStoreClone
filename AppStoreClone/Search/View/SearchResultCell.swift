@@ -92,45 +92,14 @@ class SearchResultCell: UICollectionViewCell {
             titleImage.imageFromUrl(result.artworkUrl512, image: UIImage())
         }
         
-        let screenShot1Cache = NSString(string: result.screenshotUrls[0])
         screenShot1.imageFromUrl(result.screenshotUrls[0], image: UIImage())
-//        if let cacheImage = ImageCache.shared.object(forKey: screenShot1Cache) {
-//            screenShot1.image = cacheImage
-//        } else {
-////            let image = result.screenshotUrls[0].image
-////            ImageCache.shared.setObject(image, forKey: screenShot1Cache)
-//        }
-
         if result.screenshotUrls.count > 1 {
-            let screenShot2Cache = NSString(string: result.screenshotUrls[1])
             screenShot2.imageFromUrl(result.screenshotUrls[1], image: UIImage())
         }
-//        let screenShot3Cache = NSString(string: result.screenshotUrls?[2] ?? String())
         
         if result.screenshotUrls.count > 2 {
             screenShot3.imageFromUrl(result.screenshotUrls[2], image: UIImage())
         }
-        
-        
-//
-//        if let cacheImage = ImageCache.shared.object(forKey: screenShot2Cache) {
-//            screenShot2.image = cacheImage
-//        } else {
-//            let image = result.screenshotUrls?[1].image ?? UIImage()
-//            ImageCache.shared.setObject(image, forKey: screenShot2Cache)
-////            screenShot2.image = image
-//            screenShot2.imageFromUrl(result.screenshotUrls?[1] ?? "", image: UIImage())
-//        }
-//
-//        if let cacheImage = ImageCache.shared.object(forKey: screenShot3Cache) {
-//            screenShot3.image = cacheImage
-//        } else {
-//            let image = result.screenshotUrls?[2].image ?? UIImage()
-//            ImageCache.shared.setObject(image, forKey: screenShot3Cache)
-////            screenShot3.image = image
-//            screenShot3.imageFromUrl(result.screenshotUrls?[2] ?? "", image: UIImage())
-//        }
-        
         ratingView.rating = result.averageUserRating
         ratingView.text = result.userRatingCount.userCountingFormat
         title.text = result.trackName

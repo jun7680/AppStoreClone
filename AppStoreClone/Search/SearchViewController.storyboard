@@ -23,7 +23,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUs-Ir-57S">
                                 <rect key="frame" x="8" y="10" width="359" height="40"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="6SH-lk-LX9">
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="게임, 앱, 스토리 등" translatesAutoresizingMaskIntoConstraints="NO" id="6SH-lk-LX9">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>

@@ -13,7 +13,6 @@ extension Int {
             return String(format: "%.1f천", locale: Locale.current, round(Double(self) / 10) / 100).replacingOccurrences(of: ".0", with: "")
         }
         if self >= 10000, self <= 99999 {
-            print("number", round(Double(10516)/1000) / 10, 10516 / 1000)
             return String(format: "%.1f만", locale: Locale.current, round(Double(self) / 1000) / 10).replacingOccurrences(of: ".0", with: "")
         }
         

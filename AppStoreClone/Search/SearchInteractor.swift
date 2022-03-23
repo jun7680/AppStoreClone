@@ -16,6 +16,7 @@ protocol SearchRouting: ViewableRouting {
 protocol SearchPresentable: Presentable {
     var listener: SearchPresentableListener? { get set }
     func searchResultUpdate(_ result: [Result])
+    func startSearch()
 }
 
 protocol SearchListener: AnyObject {
@@ -39,7 +40,6 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        search(term: "카카오")
     }
 
     override func willResignActive() {
@@ -48,10 +48,11 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     }
     
     func search(term: String?) {
+        presenter.startSearch()
         guard let term = term else { return }
         searchTerm = term
         searchResult.removeAll()
-        Service.shared.search(term: term) { [weak self] result, error in            
+        Service.shared.search(term: term) { [weak self] result, error in
             guard let self = self else { return }
             self.resultCount = result?.resultCount ?? 0
             if let result = result?.results {
@@ -63,6 +64,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     
     func searchWithPagination(offset: Int) {
         guard !isLoading else { return }
+        presenter.startSearch()
         isLoading = true
         Service.shared.search(term: searchTerm, offset: offset) { [weak self] result, error in
             guard let self = self else { return }

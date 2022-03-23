@@ -25,17 +25,22 @@ final class SearchDetailViewController: UIViewController,
     var height = CGFloat(200)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavigation()
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        setupNavigation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        listener?.shutdown()
+//        listener?.shutdown()
     }
     func configureCollectionView() {
         collectionView.collectionViewLayout = createCollectionViewLayout()
@@ -108,7 +113,7 @@ final class SearchDetailViewController: UIViewController,
     func setupNavigation() {
         navigationController?.navigationBar.tintColor = .systemBlue
         navigationItem.largeTitleDisplayMode = .never
-        
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
@@ -117,7 +122,6 @@ extension SearchDetailViewController: UICollectionViewDataSource {
         return 3
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(section)
         if section == 0 || section == 1 {
             return 1
         } else {
@@ -127,7 +131,6 @@ extension SearchDetailViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("section")
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath)
@@ -144,12 +147,13 @@ extension SearchDetailViewController: UICollectionViewDataSource {
             if let detailItem = detailItem {
                 cell.configure(from: detailItem, isTapMoreButton: isTapMoreButton) { [weak self] in
                     self?.isTapMoreButton = true
-                    collectionView.reloadItems(at: [indexPath])
+//                    collectionView.reloadItems(at: [indexPath])
+                    collectionView.collectionViewLayout.invalidateLayout()
                 }
                 if isTapMoreButton {
                     height = cell.contentView.frame.height + cell.labelHeight
                 }
-                collectionView.collectionViewLayout.invalidateLayout()
+                print(height)
             }
             return cell
         case 2:

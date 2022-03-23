@@ -32,11 +32,11 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigation()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigation()
         subscribeUI()
     }
     
@@ -68,7 +68,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         cancelButton.rx.tap
             .asDriver()
             .drive(with: self) { owner, _ in
+                owner.searchBar.text = nil
+                owner.result.removeAll()
                 UIView.animate(withDuration: 0.5, animations: {
+                    owner.searchColletionView.reloadData()
                     owner.cancelButton.isHidden = true
                     owner.navigationController?.navigationBar.isHidden = false
                     owner.navigationItem.largeTitleDisplayMode = .always
@@ -81,6 +84,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             .asDriver()
             .drive(with: self) { owner, _ in
                 owner.activityIndicator.startAnimating()
+                owner.searchBar.endEditing(true)
                 owner.listener?.search(term: owner.searchBar.text)
             }.disposed(by: disposeBag)
     }
@@ -91,6 +95,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             self.searchColletionView.reloadData()
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    func startSearch() {
+        activityIndicator.startAnimating()
     }
 }
 extension SearchViewController: UICollectionViewDataSource {
@@ -110,12 +118,12 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == result.count - 2 {
-            activityIndicator.startAnimating()            
             listener?.searchWithPagination(offset: result.count)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.endEditing(true)
         listener?.goToDetail(result[indexPath.row])        
     }
     

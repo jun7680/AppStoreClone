@@ -38,6 +38,7 @@ class DescriptionCell: UICollectionViewCell {
     }
 
     @IBAction func didTapReadMore(_ sender: Any) {
+        
         didTapReadMoreButton?()
         isTapMoreButton = true
     }
@@ -46,7 +47,6 @@ class DescriptionCell: UICollectionViewCell {
         self.didTapReadMoreButton = didTapReadMoreButton
         version.text = "버전 ".appending(item.version)
         releaseNote.textLineHeight(text: item.releaseNotes, height: 20)
-        print("line", releaseNote.numberOfLines)
         moreButton.isHidden = (item.releaseNotes?.originTextLine ?? 0) <= 2
         if isTapMoreButton {
             releaseNote.numberOfLines = 0
