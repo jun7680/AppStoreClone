@@ -21,14 +21,17 @@
 		57479E6027E86942001CD334 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 57479E5F27E86942001CD334 /* RxCocoa */; };
 		57479E6227E86942001CD334 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 57479E6127E86942001CD334 /* RxRelay */; };
 		57479E6427E86942001CD334 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57479E6327E86942001CD334 /* RxSwift */; };
+		576ABED027EAAF6B007B4FC6 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576ABECF27EAAF6B007B4FC6 /* UILabel+.swift */; };
 		57796C2427E7FA5800F48E09 /* RootTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57796C2327E7FA5800F48E09 /* RootTabBarController.storyboard */; };
 		57796C2727E818FE00F48E09 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 57796C2627E818FE00F48E09 /* Cosmos */; };
 		577A0D0127E827220038F5EE /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A0D0027E827220038F5EE /* SearchResultCell.swift */; };
 		577A0D0527E83CCA0038F5EE /* SearchResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A0D0427E83CCA0038F5EE /* SearchResultDTO.swift */; };
+		57F8EDF927EB0C040054DE4D /* RIBMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F8EDF827EB0C040054DE4D /* RIBMocks.swift */; };
+		57F8EDFB27EB10520054DE4D /* SearchInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F8EDFA27EB10520054DE4D /* SearchInteractorSpec.swift */; };
+		57F8EDFD27EB10920054DE4D /* SearchMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F8EDFC27EB10920054DE4D /* SearchMocks.swift */; };
 		663901D327E7372900BEB0BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663901D227E7372900BEB0BC /* AppDelegate.swift */; };
 		663901DC27E7372A00BEB0BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 663901DB27E7372A00BEB0BC /* Assets.xcassets */; };
 		663901DF27E7372A00BEB0BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 663901DD27E7372A00BEB0BC /* LaunchScreen.storyboard */; };
-		663901EA27E7372A00BEB0BC /* AppStoreCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663901E927E7372A00BEB0BC /* AppStoreCloneTests.swift */; };
 		663901F427E7372B00BEB0BC /* AppStoreCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663901F327E7372B00BEB0BC /* AppStoreCloneUITests.swift */; };
 		663901F627E7372B00BEB0BC /* AppStoreCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663901F527E7372B00BEB0BC /* AppStoreCloneUITestsLaunchTests.swift */; };
 		6639020427E7373B00BEB0BC /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 6639020327E7373B00BEB0BC /* RIBs */; };
@@ -75,16 +78,19 @@
 		573C302227E96EB400BD73A3 /* SearchComponent+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchComponent+.swift"; sourceTree = "<group>"; };
 		57479E5A27E84667001CD334 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		57479E5C27E86072001CD334 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
+		576ABECF27EAAF6B007B4FC6 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		57796C2327E7FA5800F48E09 /* RootTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RootTabBarController.storyboard; sourceTree = "<group>"; };
 		577A0D0027E827220038F5EE /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		577A0D0427E83CCA0038F5EE /* SearchResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDTO.swift; sourceTree = "<group>"; };
+		57F8EDF827EB0C040054DE4D /* RIBMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIBMocks.swift; sourceTree = "<group>"; };
+		57F8EDFA27EB10520054DE4D /* SearchInteractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractorSpec.swift; sourceTree = "<group>"; };
+		57F8EDFC27EB10920054DE4D /* SearchMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMocks.swift; sourceTree = "<group>"; };
 		663901CF27E7372900BEB0BC /* AppStoreClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		663901D227E7372900BEB0BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		663901DB27E7372A00BEB0BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		663901DE27E7372A00BEB0BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		663901E027E7372A00BEB0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		663901E527E7372A00BEB0BC /* AppStoreCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		663901E927E7372A00BEB0BC /* AppStoreCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneTests.swift; sourceTree = "<group>"; };
 		663901EF27E7372B00BEB0BC /* AppStoreCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		663901F327E7372B00BEB0BC /* AppStoreCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITests.swift; sourceTree = "<group>"; };
 		663901F527E7372B00BEB0BC /* AppStoreCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -227,7 +233,9 @@
 		663901E827E7372A00BEB0BC /* AppStoreCloneTests */ = {
 			isa = PBXGroup;
 			children = (
-				663901E927E7372A00BEB0BC /* AppStoreCloneTests.swift */,
+				57F8EDF827EB0C040054DE4D /* RIBMocks.swift */,
+				57F8EDFC27EB10920054DE4D /* SearchMocks.swift */,
+				57F8EDFA27EB10520054DE4D /* SearchInteractorSpec.swift */,
 			);
 			path = AppStoreCloneTests;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				6639021B27E73B8700BEB0BC /* Ribs+Navi.swift */,
 				57479E5C27E86072001CD334 /* ImageUtil.swift */,
 				669EDAB427E8D019009C9B80 /* Int+.swift */,
+				576ABECF27EAAF6B007B4FC6 /* UILabel+.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -364,6 +373,7 @@
 					};
 					663901E427E7372A00BEB0BC = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 						TestTargetID = 663901CE27E7372900BEB0BC;
 					};
 					663901EE27E7372B00BEB0BC = {
@@ -448,6 +458,7 @@
 				5727F45A27E99F2E004A4C7F /* TitleCell.swift in Sources */,
 				573C302127E9543B00BD73A3 /* SearchDetailInteractor.swift in Sources */,
 				6639022827E75B4600BEB0BC /* SearchInteractor.swift in Sources */,
+				576ABED027EAAF6B007B4FC6 /* UILabel+.swift in Sources */,
 				669EDAB527E8D019009C9B80 /* Int+.swift in Sources */,
 				573C302027E9543B00BD73A3 /* SearchDetailBuilder.swift in Sources */,
 				663901D327E7372900BEB0BC /* AppDelegate.swift in Sources */,
@@ -462,7 +473,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				663901EA27E7372A00BEB0BC /* AppStoreCloneTests.swift in Sources */,
+				57F8EDFD27EB10920054DE4D /* SearchMocks.swift in Sources */,
+				57F8EDF927EB0C040054DE4D /* RIBMocks.swift in Sources */,
+				57F8EDFB27EB10520054DE4D /* SearchInteractorSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,15 +692,23 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q934YS22W7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.injun.AppStoreCloneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "AppStoreCloneTests/AppStoreCloneTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppStoreClone.app/AppStoreClone";
@@ -699,15 +720,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q934YS22W7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.injun.AppStoreCloneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "AppStoreCloneTests/AppStoreCloneTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppStoreClone.app/AppStoreClone";

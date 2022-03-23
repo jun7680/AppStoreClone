@@ -18,6 +18,7 @@ protocol SearchDetailPresentable: Presentable {
 }
 
 protocol SearchDetailListener: AnyObject {
+    func shutdown()
 }
 
 final class SearchDetailInteractor: PresentableInteractor<SearchDetailPresentable>, SearchDetailInteractable, SearchDetailPresentableListener {
@@ -40,6 +41,9 @@ final class SearchDetailInteractor: PresentableInteractor<SearchDetailPresentabl
 
     override func willResignActive() {
         super.willResignActive()
-        
-    }    
+    }
+    
+    func shutdown() {
+        listener?.shutdown()
+    }
 }

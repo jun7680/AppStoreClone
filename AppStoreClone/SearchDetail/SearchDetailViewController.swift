@@ -10,32 +10,41 @@ import RxSwift
 import UIKit
 
 protocol SearchDetailPresentableListener: AnyObject {
-    
+    func shutdown()
 }
 
-final class SearchDetailViewController: UIViewController, SearchDetailPresentable, SearchDetailViewControllable {
+final class SearchDetailViewController: UIViewController,
+                                        SearchDetailPresentable,
+                                        SearchDetailViewControllable {
     
     weak var listener: SearchDetailPresentableListener?
+    var disposeBag = DisposeBag()
     @IBOutlet weak var collectionView: UICollectionView!
-    
     private var detailItem: Result? = nil
-    
+    var isTapMoreButton = false
+    var height = CGFloat(200)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupNavigation()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        setupNavigation()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        listener?.shutdown()
     }
     func configureCollectionView() {
         collectionView.collectionViewLayout = createCollectionViewLayout()
-        
     }
     
-    func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { sectionNumber, env -> NSCollectionLayoutSection? in
+    func createCollectionViewLayout() -> UICollectionViewLayout {
+        
+        let layout = UICollectionViewCompositionalLayout {[weak self] sectionNumber, env -> NSCollectionLayoutSection? in
+            
             if sectionNumber == 0 {
                 let item = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
@@ -47,10 +56,8 @@ final class SearchDetailViewController: UIViewController, SearchDetailPresentabl
                   bottom: 2,
                   trailing: 2)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .estimated(200)), subitems: [item])
-                group.contentInsets = .init(top: 0, leading: 5, bottom: 16, trailing: 5)
+                group.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
                 let section = NSCollectionLayoutSection(group: group)
-                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: "catgoryHeaderId", alignment: .topLeading)]
-                section.orthogonalScrollingBehavior = .groupPaging
                 section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
                 return section
             } else if sectionNumber == 1 {
@@ -63,19 +70,29 @@ final class SearchDetailViewController: UIViewController, SearchDetailPresentabl
                   leading: 2,
                   bottom: 2,
                   trailing: 2)
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .estimated(200)), subitems: [item])
-                group.contentInsets = .init(top: 0, leading: 5, bottom: 16, trailing: 5)
+                
+                
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(self?.height ?? 0)), subitems: [item])
+            
+                group.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
                 let section = NSCollectionLayoutSection(group: group)
-                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: "catgoryHeaderId", alignment: .topLeading)]
-                section.orthogonalScrollingBehavior = .groupPaging
-                section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+                section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 0)
+                
                 return section
             } else {
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(2.5)))
+                let item = NSCollectionLayoutItem(
+                    layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                      heightDimension: .fractionalHeight(2.5)
+                                     )
+                )
                 item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.45), heightDimension: .estimated(150)), subitems: [item])
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                      heightDimension: .estimated(150)),
+                    subitems: [item]
+                )
                 let section = NSCollectionLayoutSection(group: group)
-                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: "catgoryHeaderId", alignment: .topLeading)]
+                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
                 section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
                 return section
@@ -89,9 +106,9 @@ final class SearchDetailViewController: UIViewController, SearchDetailPresentabl
     }
     
     func setupNavigation() {
+        navigationController?.navigationBar.tintColor = .systemBlue
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.sizeToFit()
+        
     }
 }
 
@@ -108,7 +125,9 @@ extension SearchDetailViewController: UICollectionViewDataSource {
         }
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("section")
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath)
@@ -123,7 +142,14 @@ extension SearchDetailViewController: UICollectionViewDataSource {
                     as? DescriptionCell
             else { return .init() }
             if let detailItem = detailItem {
-                cell.configure(from: detailItem)
+                cell.configure(from: detailItem, isTapMoreButton: isTapMoreButton) { [weak self] in
+                    self?.isTapMoreButton = true
+                    collectionView.reloadItems(at: [indexPath])
+                }
+                if isTapMoreButton {
+                    height = cell.contentView.frame.height + cell.labelHeight
+                }
+                collectionView.collectionViewLayout.invalidateLayout()
             }
             return cell
         case 2:
@@ -136,8 +162,16 @@ extension SearchDetailViewController: UICollectionViewDataSource {
             return cell
         default: return .init()
         }
-        
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeader", for: indexPath)
+            
+            return headerView
+        default:
+            assert(false, "error")
+        }
     }
 }
-

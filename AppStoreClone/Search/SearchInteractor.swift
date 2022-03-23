@@ -10,6 +10,7 @@ import RxSwift
 
 protocol SearchRouting: ViewableRouting {
     func routeToDetail(_ item: Result)
+    func detachDetail()
 }
 
 protocol SearchPresentable: Presentable {
@@ -18,7 +19,6 @@ protocol SearchPresentable: Presentable {
 }
 
 protocol SearchListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
 final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchInteractable, SearchPresentableListener {
@@ -80,5 +80,9 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     
     func goToDetail(_ item: Result) {
         router?.routeToDetail(item)
+    }
+    
+    func shutdown() {
+        router?.detachDetail()
     }
 }

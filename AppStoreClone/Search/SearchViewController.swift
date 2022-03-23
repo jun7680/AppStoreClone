@@ -42,13 +42,13 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     private func setupNavigation() {
         navigationItem.title = "검색"
-        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
 
-//        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -58,6 +58,23 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         searchBar.rx.textDidBeginEditing
             .asDriver()
             .drive(with: self) { owner, _ in
+                UIView.animate(withDuration: 0.5, animations: {
+                    owner.cancelButton.isHidden = false
+                    owner.navigationController?.navigationBar.isHidden = true
+                    owner.navigationItem.largeTitleDisplayMode = .never
+                })
+            }.disposed(by: disposeBag)
+        
+        cancelButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                UIView.animate(withDuration: 0.5, animations: {
+                    owner.cancelButton.isHidden = true
+                    owner.navigationController?.navigationBar.isHidden = false
+                    owner.navigationItem.largeTitleDisplayMode = .always
+                    owner.searchBar.endEditing(true)
+                })
+                
             }.disposed(by: disposeBag)
         
         searchBar.rx.searchButtonClicked
@@ -99,7 +116,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        listener?.goToDetail(result[indexPath.row])
+        listener?.goToDetail(result[indexPath.row])        
     }
     
 }
